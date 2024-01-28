@@ -75,3 +75,13 @@ int Matrix::operator()(int row, int colum) const {
 int& Matrix::operator()(int row, int colum)  {
   return data_[row][colum];
 }
+
+
+void Matrix::print() const {
+  for (int i = 0; i < rows_; ++i) {
+    for (int j = 0; j < cols_; ++j) {
+      std::cout << data_[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+}

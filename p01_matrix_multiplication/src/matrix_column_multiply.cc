@@ -14,12 +14,12 @@ MatrixColumnMultiply& MatrixColumnMultiply::operator*(const Matrix& kMatrix) con
   if (getCols() != kMatrix.getRows()) {
     throw std::invalid_argument("The number of columns of the first matrix must be equal to the number of rows of the second matrix.");
   }
-  MatrixColumnMultiply* result = new MatrixColumnMultiply(getCols(), kMatrix.getRows());
-  for (int column = 0; column < getCols(); column++) {
-    for (int row = 0; row < kMatrix.getRows(); row++) {
+  MatrixColumnMultiply* result = new MatrixColumnMultiply(getRows(), kMatrix.getCols());
+  for (int column = 0; column < kMatrix.getCols(); column++) {
+    for (int row = 0; row < getRows(); row++) {
       int sum = 0;
       for (int row_2 = 0; row_2 < kMatrix.getRows(); row_2++) {
-        sum += (*this)(row, row_2) * kMatrix(column, row_2);
+        sum += (*this)(row, row_2) * kMatrix(row_2, column);
       }
       (*result)(row, column) = sum;
     }
