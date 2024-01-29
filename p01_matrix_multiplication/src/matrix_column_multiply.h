@@ -1,11 +1,8 @@
-#include "matrix.h"
+#include "matrix_multiply.h"
 
 #pragma once
 
-class MatrixColumnMultiply : public Matrix {
+class MatrixColumnMultiply : public MatrixMultiply {
  public:
-  MatrixColumnMultiply(int rows, int cols);
-  MatrixColumnMultiply(int rows, int cols, int value);
-  MatrixColumnMultiply(const MatrixColumnMultiply& kMatrix);
-  virtual MatrixColumnMultiply& operator*(const Matrix& kMatrix) const;
+  Matrix multiplication(const Matrix& kMatrix_1, const Matrix& kMatrix_2) const override;
 };

@@ -2,14 +2,11 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "matrix.h"
+#include "matrix_multiply.h"
 
 #pragma once
 
-class MatrixRowMultiply : public Matrix {
+class MatrixRowMultiply : public MatrixMultiply {
  public:
-  MatrixRowMultiply(int rows, int cols);
-  MatrixRowMultiply(int rows, int cols, int value);
-  MatrixRowMultiply(const MatrixRowMultiply& kMatrix);
-  virtual MatrixRowMultiply& operator*(const Matrix& kMatrix) const;
+   Matrix multiplication(const Matrix& kMatrix_1, const Matrix& kMatrix_2) const override;
 };

@@ -9,9 +9,10 @@
  * @param rows 
  * @param cols 
  */
-Matrix::Matrix(int rows, int cols) : rows_(rows), cols_(cols), data_(rows) {
+Matrix::Matrix(int rows, int cols) : rows_(rows), cols_(cols) {
+  data_ = new int*[rows];
   for (int i = 0; i < rows; ++i) {
-    data_[i].resize(cols);
+    data_[i] = new int[cols];
   }
 }
 
@@ -23,9 +24,9 @@ Matrix::Matrix(int rows, int cols) : rows_(rows), cols_(cols), data_(rows) {
  * @param value 
  */
 Matrix::Matrix(int rows, int cols, int value) : rows_(rows), cols_(cols) {
-  data_.resize(rows);
+  data_ = new int*[rows];
   for (int i = 0; i < rows; ++i) {
-    data_[i].resize(cols, value);
+    data_[i] = new int[0];
   }
 }
 
@@ -34,7 +35,15 @@ Matrix::Matrix(int rows, int cols, int value) : rows_(rows), cols_(cols) {
  * 
  * @param kMatrix 
  */
-Matrix::Matrix(const Matrix& kMatrix) : rows_(kMatrix.rows_), cols_(kMatrix.cols_), data_(kMatrix.data_) {}
+Matrix::Matrix(const Matrix& kMatrix) : rows_(kMatrix.rows_), cols_(kMatrix.cols_) {
+  data_ = new int*[rows_];
+  for (int i = 0; i < rows_; ++i) {
+    data_[i] = new int[cols_];
+    for (int j = 0; j < cols_; ++j) {
+      data_[i][j] = kMatrix(i, j);
+    }
+  }
+}
 
 /**
  * @brief Returns the number of rows in the matrix container.
@@ -76,12 +85,13 @@ int& Matrix::operator()(int row, int colum)  {
   return data_[row][colum];
 }
 
-
-void Matrix::print() const {
+/**
+ * @brief Destroy the Matrix:: Matrix object
+ * 
+ */
+Matrix::~Matrix() {
   for (int i = 0; i < rows_; ++i) {
-    for (int j = 0; j < cols_; ++j) {
-      std::cout << data_[i][j] << " ";
-    }
-    std::cout << std::endl;
+    delete[] data_[i];
   }
+  delete[] data_;
 }
