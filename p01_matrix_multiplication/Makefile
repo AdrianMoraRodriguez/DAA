@@ -17,7 +17,7 @@ CXX = g++						                                      # C++ compiler command
 CXXFLAGS = -g -std=c++17 # C++ compiler options 
 LDFLAGS =	-lstdc++			                                      # Linker options (if any)
 SRCDIR = src
-OBJDIR = obj
+OBJDIR = lib
 BINDIR = .
 
 SOURCES := $(wildcard $(SRCDIR)/*.cc)
@@ -27,17 +27,20 @@ EXECUTABLE = $(BINDIR)/p01_MatrixMultiply
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	@ $(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cc
-	mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@ mkdir -p $(OBJDIR)
+	@ echo "Compiling $<..."
+	@ $(CC) $(CFLAGS) -c -o $@ $<
 
 clean :
 	@ rm -f *.o string doc
 	@ rm -f p01_MatrixMultiply
 	@ rm -rf *~ basura b i
 	@ rm -rf a.out
+	@ rm -f $(OBJECTS) $(EXECUTABLE)
+	@ rm -f lib/*.o
 	@ find . -name '*~' -exec rm {} \;
 	@ find . -name basura -exec rm {} \;
 
