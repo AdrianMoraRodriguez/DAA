@@ -1,9 +1,9 @@
 # Universidad de La Laguna
 # Escuela Superior de IngIniería y Tecnología
 # Grado En IngIniería Informática
-# Asignatura: Algoritmos y Estructuras de Datos Avanzadas
-# Curso: 2º
-# Práctica 1: Big Ints
+# Asignatura: Diseño y Análisis de Algoritmos
+# Curso: 3º
+# Práctica 1: Multiplicación de Matrices
 # Autor: Adrián Mora Rodríguez 
 # Correo: alu0101465883@ull.edu.es
 # Fecha:  11/02/23
