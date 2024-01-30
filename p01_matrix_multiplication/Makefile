@@ -1,21 +1,6 @@
-# Universidad de La Laguna
-# Escuela Superior de IngIniería y Tecnología
-# Grado En IngIniería Informática
-# Asignatura: Diseño y Análisis de Algoritmos
-# Curso: 3º
-# Práctica 1: Multiplicación de Matrices
-# Autor: Adrián Mora Rodríguez 
-# Correo: alu0101465883@ull.edu.es
-# Fecha:  11/02/23
-# Archivo MakeFile
-# Referencias:
-# https://makefiletutorial.com/
-
-
-
-CXX = g++						                                      # C++ compiler command
-CXXFLAGS = -g -std=c++17 # C++ compiler options 
-LDFLAGS =	-lstdc++			                                      # Linker options (if any)
+CC = g++
+CFLAGS = -std=c++17
+LDFLAGS = -lstdc++
 SRCDIR = src
 OBJDIR = lib
 BINDIR = .
