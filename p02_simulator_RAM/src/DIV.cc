@@ -6,17 +6,9 @@
  * @date 2024-01-30
  * 
  */
-#include "alu.h"
 
-#pragma once
+#include "DIV.h"
 
-/**
- * @brief Clase DIV que hereda de ALU
- * 
- */
-class DIV : public ALU {
- public:
-  DIV() {}
-  ~DIV() {}
-  int operate(int r0, int operand) const override;
-};
+int DIV::operate(int r0, int operand) const {
+  return r0 / operand;
+}

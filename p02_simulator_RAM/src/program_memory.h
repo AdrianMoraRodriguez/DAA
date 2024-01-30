@@ -26,6 +26,7 @@ class ProgramMemory {
   void createLabel(const std::string& kLabel, int line_number);
   void loadProgram(const std::string& kFilename);
   std::string getInstruction(int line_number) const { return program_[line_number]; };
+  void printProgram() const; //TODO Eliminar esta función al acabar de debuggear
  private:
   std::vector<std::string> program_;
   std::map<std::string, int> labels_;

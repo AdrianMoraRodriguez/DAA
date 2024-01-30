@@ -16,6 +16,9 @@
  */
 void ProgramMemory::loadProgram(const std::string& kFilename) {
   std::ifstream file(kFilename);
+  if (!file.is_open()) {
+    std::cerr << "Error al abrir el fichero " << kFilename << std::endl;
+  }
   std::string line;
   while (std::getline(file, line)) {
     if (line.size() == 0) continue;
@@ -33,4 +36,10 @@ void ProgramMemory::loadProgram(const std::string& kFilename) {
  */
 void ProgramMemory::createLabel(const std::string& kLabel, int line_number) {
   labels_[kLabel] = line_number;
+}
+
+void ProgramMemory::printProgram() const {
+  for (int i = 0; i < program_.size(); i++) {
+    std::cout << program_[i] << std::endl;
+  }
 }
