@@ -15,28 +15,24 @@
 
 CXX = g++						                                      # C++ compiler command
 CXXFLAGS = -g -std=c++17 # C++ compiler options 
-LDFLAGS =						                                      # Linker options (if any)
+LDFLAGS =	-lstdc++			                                      # Linker options (if any)
+SRCDIR = src
+OBJDIR = obj
+BINDIR = .
 
-# The all target builds all of the programs handled by the makefile.
-all: clean p01_MatrixMultiply
+SOURCES := $(wildcard $(SRCDIR)/*.cc)
+OBJECTS := $(patsubst $(SRCDIR)/%.cc,$(OBJDIR)/%.o,$(SOURCES))
+EXECUTABLE = $(BINDIR)/p01_MatrixMultiply
 
-p01_MatrixMultiply: src/main.cc
+all: $(EXECUTABLE)
 
-	@echo "Linking $@"
-	@$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
-	@echo "Compilation complete. $@ is ready to run."
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-# Indicate that the all and clean targets do not
-# correspond to actual files.
-.PHONY: all clean targz
+$(OBJDIR)/%.o: $(SRCDIR)/%.cc
+	mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-# The following rule is effectively built into make and
-# therefore need not be explicitly specified:
-	@$(CXX) $(CXXFLAGS) -c $<
-
-# The clean target removes all of the executable files
-# and object files produced by the build process
-# We can use it for additional housekeeping purposes
 clean :
 	@ rm -f *.o string doc
 	@ rm -f p01_MatrixMultiply

@@ -2,9 +2,9 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "matrix.cc"
-#include "matrix_row_multiply.cc"
-#include "matrix_column_multiply.cc"
+#include "matrix.h"
+#include "matrix_row_multiply.h"
+#include "matrix_column_multiply.h"
 
 double getMultiplicationTime(const MatrixMultiply& kMatrixMultiply, const Matrix& kMatrix_1, const Matrix& kMatrix_2) {
   int start_time = clock();
