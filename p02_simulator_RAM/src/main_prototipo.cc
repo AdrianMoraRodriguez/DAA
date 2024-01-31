@@ -17,3 +17,5 @@ int main(int argc, char* argv[]) {
   program_memory.printProgram();
   return 0;
 }
+
+//TODO PREGUNTAR AL PROFESOR SI EN EL MENSAJE DE ERROR HAY QUE TENER EN CUENTA LOS COMENTARIOS Y LINEAS EN BLANCO
