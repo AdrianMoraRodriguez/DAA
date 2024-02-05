@@ -18,13 +18,16 @@ void ProgramMemory::loadProgram(const std::string& kFilename) {
   std::ifstream file(kFilename);
   if (!file.is_open()) {
     std::cerr << "Error al abrir el fichero " << kFilename << std::endl;
+    exit(1);
   }
   std::string line;
   while (std::getline(file, line)) {
-    if (line.size() == 0) continue; //A lo mejor no hay que quitarla, si es así va a ser más fácil añadir otro vector con el programa entero, comentarios incluidos
+    if (line.size() == 0) continue; 
     if (line[0] == '#') continue;
     program_.push_back(line);
+    std::cout << line << std::endl;
   }
+  std::cout << "Programa cargado ##############" << std::endl;
   file.close();
   //si encontramos una palabra al principio de la línea con dos puntos, es una etiqueta, por lo que se guarda
   for (int i = 0; i < program_.size(); i++) {
@@ -33,6 +36,8 @@ void ProgramMemory::loadProgram(const std::string& kFilename) {
     std::string label = program_[i].substr(0, program_[i].find(delimiter));
     if (label.size() == program_[i].size()) continue;
     createLabel(label, i);
+    //quitar la etiqueta de la línea y dejar la instrucción como pirmiera palabra
+    program_[i] = program_[i].substr(program_[i].find(delimiter) + 1, program_[i].size());
   }
 }
 

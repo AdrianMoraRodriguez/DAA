@@ -10,5 +10,37 @@
 #include "data_memory.h"
 
 void DataMemory::Load(int address, int value) {
-  registers_[address] = value;
+  try {
+    data_writter_->Write(address, value, registers_);
+  } catch (const std::exception& e) {
+    throw "Error en la escritura de datos";
+  }
+}
+
+int DataMemory::Read(int address) {
+  try {
+    data_reader_->Read(address, registers_);
+  } catch (const std::exception& e) {
+    throw "Error en la lectura de datos";
+  }
+}
+
+void DataMemory::SetNewDataReader(std::string data_reader_type) {
+  if (data_reader_type == "direct") {
+    data_reader_ = new DirectDataReader();
+  } else if (data_reader_type == "indirect") {
+    data_reader_ = new IndirectDataReader();
+  } else if (data_reader_type == "constant") {
+    data_reader_ = new ContastDataReader();
+  }
+}
+
+void DataMemory::SetNewDataWritter(std::string data_writter_type) {
+  if (data_writter_type == "direct") {
+    data_writter_ = new DirectDataWritter();
+  } else if (data_writter_type == "indirect") {
+    data_writter_ = new IndirectDataWritter();
+  } else if (data_writter_type == "constant") {
+    data_writter_ = new ContastDataWritter();
+  }
 }

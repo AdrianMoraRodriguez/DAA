@@ -10,5 +10,9 @@
 #include "direct_data_reader.h"
 
 int DirectDataReader::Read(int address, const std::vector<int>& kVector) {
-  return kVector[address];
+  try {
+    return kVector[address];
+  } catch (const std::exception& e) {
+    throw "Error en la lectura de datos directa en la posición: " + address;
+  }
 }

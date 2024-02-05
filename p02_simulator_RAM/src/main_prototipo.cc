@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "program_memory.h"
+#include "maquina_ram.h"
 
 
 int main(int argc, char* argv[]) {
@@ -12,10 +12,13 @@ int main(int argc, char* argv[]) {
     std::cerr << "Uso: " << argv[0] << " <fichero_ensamblador>" << std::endl;
     return 1;
   }
+  std::string kFileName = argv[1];
   ProgramMemory program_memory;
-  program_memory.loadProgram(argv[1]);
+  program_memory.loadProgram(kFileName);
   program_memory.printProgram();
+  MaquinaRAM maquina_ram(kFileName);
+  maquina_ram.Run();
   return 0;
 }
 
-//TODO PREGUNTAR AL PROFESOR SI EN EL MENSAJE DE ERROR HAY QUE TENER EN CUENTA LOS COMENTARIOS Y LINEAS EN BLANCO
+//TODO OPERACIONES QUE DEBEN FALLAR: Write 0, READ =, 

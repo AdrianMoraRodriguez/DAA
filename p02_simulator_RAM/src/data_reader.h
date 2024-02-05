@@ -15,5 +15,7 @@
  * 
  */
 class DataReader {
+ public:
   virtual int Read(int address, const std::vector<int>& kVector) = 0;
 };
+//TODO lo que voy a hacer es encontrar si está el caracter * o =, cambiar al modo respectivo y al poner la operación, como entrada a la función se le pasa la salida de la lectura

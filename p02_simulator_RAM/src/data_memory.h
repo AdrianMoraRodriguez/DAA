@@ -11,17 +11,30 @@
 #include <string>
 #include <vector>
 
+#include "data_reader.h"
+#include "direct_data_reader.h"
+#include "indirect_data_reader.h"
+#include "constant_data_reader.h"
+
+#include "data_writter.h"
+#include "direct_data_writter.h"
+#include "indirect_data_writter.h"
+#include "constant_data_writter.h"
+
 #pragma once
 
 class DataMemory {
  public: 
   DataMemory(int number_of_registers = 40) : registers_(number_of_registers, 0) {}
+  DataMemory(DataMemory& data_memory) : registers_(data_memory.registers_) {}
   ~DataMemory() {}
-  void Load(int address, int value); //TODO Cambiar esta función cuando tenga implementado el data_writter
-  int Read(int address); //TODO Cambiar esta función cuando tenga implementado el data_reader
+  void Load(int address, int value); 
+  int Read(int address);
+  void SetNewDataReader(std::string data_reader_type);
+  void SetNewDataWritter(std::string data_writter_type);
+  int getr0() {return registers_[0];}
  private:
   std::vector<int> registers_;
-  //TODO Añadir como atributos el data_reader y el data_writter
+  DataReader* data_reader_ = new DirectDataReader();
+  DataWritter* data_writter_ = new DirectDataWritter();
 };
-
-// [ ] Hacer un main básico para probar la lectura de un fichero y ver si se parsea bien
