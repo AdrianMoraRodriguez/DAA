@@ -8,7 +8,14 @@
  */
 
 #include "program_memory.h"
-
+std::string preProcessInstruction(std::string instruction) {
+  std::string auxiliar;
+  for (int i = 0; i < instruction.size(); i++) {
+    if (instruction[i] == ' ' || instruction[i] == '\r' || instruction[i] == '\n' || instruction[i] =='\t') continue;
+    auxiliar += instruction[i];
+  }
+  return auxiliar;
+}
 /**
  * @brief Load the program from a file.
  * 
@@ -22,12 +29,14 @@ void ProgramMemory::loadProgram(const std::string& kFilename) {
   }
   std::string line;
   while (std::getline(file, line)) {
-    if (line.size() == 0) continue; 
-    if (line[0] == '#') continue;
+    std::string aux = preProcessInstruction(line);
+    if (aux.size() == 0) continue; 
+    if (aux[0] == '#') continue;
+    if (aux[0] == '\r') continue;
+    if (aux[0] == '\n') continue;
+    if (aux == "\t") continue;
     program_.push_back(line);
-    std::cout << line << std::endl;
   }
-  std::cout << "Programa cargado ##############" << std::endl;
   file.close();
   //si encontramos una palabra al principio de la línea con dos puntos, es una etiqueta, por lo que se guarda
   for (int i = 0; i < program_.size(); i++) {
@@ -51,13 +60,15 @@ void ProgramMemory::createLabel(const std::string& kLabel, int line_number) {
   labels_[kLabel] = line_number;
 }
 
-void ProgramMemory::printProgram() const {
-  for (int i = 0; i < program_.size(); i++) {
-    std::cout << program_[i] << std::endl;
-  }
-  //Imprimir las etiquetas
-  std::cout << "Etiquetas:" << std::endl;
-  for (auto it = labels_.begin(); it != labels_.end(); it++) {
-    std::cout << it->first << " " << it->second << std::endl;
+
+void ProgramMemory::checkOperation(const std::vector<std::string>& kOperation, const std::string& type_of_access) {
+  if (kOperation[0] == "store" && type_of_access == "constant") {
+    throw "No se puede almacenar en una dirección de memoria constante";
+  } else if (kOperation[0] == "read" && type_of_access == "constant") {
+    throw "No se puede cargar a una dirección de memoria constante";
+  } else if (kOperation[0] == "jump" && type_of_access == "constant") {
+    throw "No se puede saltar a una dirección de memoria constante";
+  } else if (kOperation[0] == "write" && kOperation[1] == "0" && type_of_access == "direct") {
+    throw "No se puede escribir desde la dirección 0";
   }
 }

@@ -9,7 +9,7 @@
 
 #include "data_memory.h"
 
-void DataMemory::Load(int address, int value) {
+void DataMemory::modifyMemory(int address, int value) {
   try {
     data_writter_->Write(address, value, registers_);
   } catch (const std::exception& e) {
@@ -17,9 +17,13 @@ void DataMemory::Load(int address, int value) {
   }
 }
 
+void DataMemory::load(int address) {
+  registers_[0] = data_reader_->Read(address, registers_);
+}
+
 int DataMemory::Read(int address) {
   try {
-    data_reader_->Read(address, registers_);
+    return data_reader_->Read(address, registers_);
   } catch (const std::exception& e) {
     throw "Error en la lectura de datos";
   }

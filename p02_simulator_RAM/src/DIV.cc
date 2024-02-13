@@ -10,5 +10,8 @@
 #include "DIV.h"
 
 int DIV::operate(int r0, int operand) const {
+  if (operand == 0) {
+    throw std::invalid_argument("No se puede dividir por 0");
+  }
   return r0 / operand;
 }

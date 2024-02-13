@@ -28,20 +28,25 @@
 #include "JUMP.h"
 #include "JZERO.h"
 #include "JGTZ.h"
+#include "input_tape.h"
+#include "output_tape.h"
 
 #pragma once
 
 class MaquinaRAM {
  public:
   MaquinaRAM() {}
-  MaquinaRAM(const std::string& kFileName ,int number_of_registers = 40);
+  MaquinaRAM(const std::string& kFileName, const std::string& kInputFileName, const std::string& kOutputFile,int number_of_registers = 40);
   MaquinaRAM(MaquinaRAM& maquina_ram) : data_memory_(maquina_ram.data_memory_) {}
   ~MaquinaRAM() {}
   void Run();
+  void changeMode(std::vector<std::string>& instruction_parts);
  private:
   DataMemory data_memory_;
   ProgramMemory program_memory_;
   ALU* alu_;
   ProgramFlow* program_flow_;
+  InputTape input_tape_;
+  OutputTape output_tape_;
   int pc_ = 0;
 };

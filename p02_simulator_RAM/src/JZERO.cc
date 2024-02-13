@@ -10,7 +10,7 @@
 
 #include "JZERO.h"
 
-void JZERO::jump(int& pc, int new_position, int operand) const { //TODO Tener en cuenta que operand es siempre R0
+void JZERO::jump(int& pc, int new_position, int operand) const {
   if (operand == 0) {
     pc = new_position - 1;
   }

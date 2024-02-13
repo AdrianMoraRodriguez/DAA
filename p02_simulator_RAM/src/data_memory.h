@@ -28,7 +28,8 @@ class DataMemory {
   DataMemory(int number_of_registers = 40) : registers_(number_of_registers, 0) {}
   DataMemory(DataMemory& data_memory) : registers_(data_memory.registers_) {}
   ~DataMemory() {}
-  void Load(int address, int value); 
+  void modifyMemory(int address, int value);
+  void load(int address);
   int Read(int address);
   void SetNewDataReader(std::string data_reader_type);
   void SetNewDataWritter(std::string data_writter_type);

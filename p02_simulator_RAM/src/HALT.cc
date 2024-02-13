@@ -10,5 +10,5 @@
 #include "HALT.h"
 
 void HALT::jump(int& pc, int new_position, int operand)  const {
-  exit(EXIT_SUCCESS); //TODO Falta escribir lo que hay en r0 en el fichero
+  exit(EXIT_SUCCESS);
 }

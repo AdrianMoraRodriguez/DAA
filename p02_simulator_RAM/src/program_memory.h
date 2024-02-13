@@ -28,7 +28,7 @@ class ProgramMemory {
   std::string getInstruction(int line_number) const { return program_[line_number]; };
   int getLablePosition(const std::string& kLabel) const { return labels_.at(kLabel); };
   int getProgramSize() const { return program_.size(); };
-  void printProgram() const; //TODO Eliminar esta función al acabar de debuggear
+  void checkOperation(const std::vector<std::string>& kOperation, const std::string& type_of_access);
  private:
   std::vector<std::string> program_;
   std::map<std::string, int> labels_;

@@ -16,6 +16,6 @@
  * @param r0 
  * @return int 
  */
-int SUB::operate(int operand, int r0) const {
+int SUB::operate(int r0, int operand) const {
   return r0 - operand;
 }
