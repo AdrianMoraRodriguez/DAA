@@ -11,7 +11,7 @@
 
 #pragma once
 
-class ContastDataReader : public DataReader {
+class ConstantDataReader : public DataReader {
  public:
   int Read(int address, const std::vector<int>& vector) override;
 };

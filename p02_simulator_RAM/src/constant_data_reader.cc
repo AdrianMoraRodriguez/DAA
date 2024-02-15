@@ -9,6 +9,6 @@
 
 #include "constant_data_reader.h"
 
-int ContastDataReader::Read(int address, const std::vector<int>& vector) {
+int ConstantDataReader::Read(int address, const std::vector<int>& vector) {
   return address;
 }

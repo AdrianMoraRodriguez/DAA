@@ -9,6 +9,16 @@
 #include "MUL.h"
 
 
-int MUL::operate(int r0, int operand) const {
-  return r0 * operand;
+void MUL::operate() const {
+  try {
+    isValid();
+    int result = data_memory_->getr0() * data_reader_->Read(operand_, data_memory_->getRegisters());
+    data_memory_->modifyMemory(0, result);
+  } catch (const char* e) {
+    throw e;
+  }
+}
+
+void MUL::isValid() const {
+  //everything is valid in the multiplication
 }

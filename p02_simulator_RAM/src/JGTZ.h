@@ -8,9 +8,12 @@
  */
 
 
-#include "program_flow.h"
+#include "alu.h"
 #pragma once
 
-class JGTZ : public ProgramFlow {
-  void jump(int& pc, int new_position, int operand = 0) const override;
+class JGTZ : public ALU {
+  public:
+  JGTZ(DataMemory* data_memory) {data_memory_ = data_memory;}
+  void operate() const override;
+  void isValid() const override;
 };

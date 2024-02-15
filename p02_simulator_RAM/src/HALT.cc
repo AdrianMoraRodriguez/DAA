@@ -9,6 +9,10 @@
 
 #include "HALT.h"
 
-void HALT::jump(int& pc, int new_position, int operand)  const {
+void HALT::operate() const {
   exit(EXIT_SUCCESS);
+}
+
+void HALT::isValid() const {
+  //everything is valid in the halt
 }

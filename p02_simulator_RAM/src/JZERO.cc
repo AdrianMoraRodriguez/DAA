@@ -10,8 +10,19 @@
 
 #include "JZERO.h"
 
-void JZERO::jump(int& pc, int new_position, int operand) const {
-  if (operand == 0) {
-    pc = new_position - 1;
+void JZERO::operate() const {
+  try {
+    isValid();
+    if (data_memory_->getr0() == 0) {
+      *pc_ = new_position_ - 1;
+    }
+  } catch (const char* e) {
+    throw e;
+  }
+}
+
+void JZERO::isValid() const {
+  if (new_position_ < 0) {
+    throw "Error: Se ha intentado saltar a una posición negativa.";
   }
 }

@@ -29,13 +29,10 @@ class DataMemory {
   DataMemory(DataMemory& data_memory) : registers_(data_memory.registers_) {}
   ~DataMemory() {}
   void modifyMemory(int address, int value);
-  void load(int address);
-  int Read(int address);
-  void SetNewDataReader(std::string data_reader_type);
-  void SetNewDataWritter(std::string data_writter_type);
+  void load(int value);
+  int Read(int value);
   int getr0() {return registers_[0];}
+  std::vector<int> getRegisters() {return registers_;}
  private:
   std::vector<int> registers_;
-  DataReader* data_reader_ = new DirectDataReader();
-  DataWritter* data_writter_ = new DirectDataWritter();
 };

@@ -17,7 +17,8 @@
  */
 class DIV : public ALU {
  public:
-  DIV() {}
+  DIV(DataMemory* data_memory) {data_memory_ = data_memory;}
   ~DIV() {}
-  int operate(int r0, int operand) const override;
+  void operate() const override;
+  void isValid() const override;
 };

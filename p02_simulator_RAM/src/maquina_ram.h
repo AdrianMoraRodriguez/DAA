@@ -19,7 +19,6 @@
 #include "constant_data_writter.h"
 #include "program_memory.h"
 #include "alu.h"
-#include "program_flow.h"
 #include "HALT.h"
 #include "DIV.h"
 #include "MUL.h"
@@ -40,13 +39,13 @@ class MaquinaRAM {
   MaquinaRAM(MaquinaRAM& maquina_ram) : data_memory_(maquina_ram.data_memory_) {}
   ~MaquinaRAM() {}
   void Run();
-  void changeMode(std::vector<std::string>& instruction_parts);
  private:
   DataMemory data_memory_;
   ProgramMemory program_memory_;
   ALU* alu_;
-  ProgramFlow* program_flow_;
   InputTape input_tape_;
   OutputTape output_tape_;
+  std::string input_file_;
+  std::string output_file_;
   int pc_ = 0;
 };

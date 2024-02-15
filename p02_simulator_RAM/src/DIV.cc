@@ -9,9 +9,18 @@
 
 #include "DIV.h"
 
-int DIV::operate(int r0, int operand) const {
-  if (operand == 0) {
-    throw std::invalid_argument("No se puede dividir por 0");
+void DIV::operate() const {
+  try {
+    isValid();
+    int result = data_memory_->getr0() / data_reader_->Read(operand_, data_memory_->getRegisters());
+    data_memory_->modifyMemory(0, result);
+  } catch (const char* e) {
+    throw e;
   }
-  return r0 / operand;
+}
+
+void DIV::isValid() const {
+  if (data_reader_->Read(operand_, data_memory_->getRegisters()) == 0 || data_memory_->getr0() == 0) {
+    throw "No se puede dividir entre 0";
+  }
 }

@@ -7,13 +7,14 @@
  * 
  */
 
-#include "program_flow.h"
+#include "alu.h"
 
 #pragma once
 
-class HALT : public ProgramFlow {
+class HALT : public ALU {
  public:
-  HALT() {}
+  HALT(DataMemory* data_memory) {data_memory_ = data_memory;}
   ~HALT() {}
-  void jump(int& pc, int new_position, int operand = 0) const override;
+  void operate() const override;
+  void isValid() const override;
 };

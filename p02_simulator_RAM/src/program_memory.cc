@@ -8,6 +8,103 @@
  */
 
 #include "program_memory.h"
+#include "utils.h"
+
+ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape, const std::string& kTypeOfAccess ) {
+  std::string instruction = instructionToLowerCase(kOperation[0]);
+  int operand = 0;
+  if (kOperation.size() > 1) {
+    operand = std::stoi(kOperation[1]);
+  }
+  if (instruction == "add") {
+    ALU* instruction_made = new ADD(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "sub") {
+    ALU* instruction_made = new SUB(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "mul") {
+    ALU* instruction_made = new MUL(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "div") {
+    ALU* instruction_made = new DIV(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "jump") {
+    ALU* instruction_made = new JUMP(data_memory);
+    instruction_made->loadPC(pc);
+    instruction_made->loadNewPosition(operand);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "jgtz") {
+    ALU* instruction_made = new JGTZ(data_memory);
+    instruction_made->loadPC(pc);
+    instruction_made->loadNewPosition(operand);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "jzero") {
+    ALU* instruction_made = new JZERO(data_memory);
+    instruction_made->loadPC(pc);
+    instruction_made->loadNewPosition(operand);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "store") {
+    ALU* instruction_made = new STORE(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "load") {
+    ALU* instruction_made = new LOAD(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "read") {
+    ALU* instruction_made = new READ(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadInputTape(input_tape);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "write") {
+    ALU* instruction_made = new WRITE(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadOutputTape(output_tape);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+  if (instruction == "halt") {
+    ALU* instruction_made = new HALT(data_memory);
+    instruction_made->loadOperationName(instruction);
+    return instruction_made;
+  }
+   ALU* instruction_made = new UNKNOW(data_memory);
+   instruction_made->loadOperationName(instruction);
+   return instruction_made;
+}
+
 std::string preProcessInstruction(std::string instruction) {
   std::string auxiliar;
   for (int i = 0; i < instruction.size(); i++) {
@@ -21,7 +118,7 @@ std::string preProcessInstruction(std::string instruction) {
  * 
  * @param kFilename 
  */
-void ProgramMemory::loadProgram(const std::string& kFilename) {
+void ProgramMemory::loadProgram(const std::string& kFilename, int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape) {
   std::ifstream file(kFilename);
   if (!file.is_open()) {
     std::cerr << "Error al abrir el fichero " << kFilename << std::endl;
@@ -47,6 +144,24 @@ void ProgramMemory::loadProgram(const std::string& kFilename) {
     createLabel(label, i);
     //quitar la etiqueta de la línea y dejar la instrucción como pirmiera palabra
     program_[i] = program_[i].substr(program_[i].find(delimiter) + 1, program_[i].size());
+  }
+  makeInstructions(pc, data_memory, output_tape, input_tape);
+}
+
+void ProgramMemory::makeInstructions(int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape) {
+  for (int i = 0; i < program_.size(); i++) {
+    std::vector<std::string> instruction_parts = prepareCommand(program_[i]);
+    std::string type_of_access = "";
+    if (instruction_parts.size() > 1) {
+      type_of_access = getTypeOfAccess(instruction_parts[1], labels_);
+    }
+    try {
+    ALU* instruction = generateInstruction(instruction_parts, pc, data_memory, output_tape, input_tape, type_of_access);
+    instructions_.push_back(instruction);
+    } catch (const char* e) {
+      std::cerr << "Error en la línea " << i << ": " << e << std::endl;
+      exit(1);
+    }
   }
 }
 

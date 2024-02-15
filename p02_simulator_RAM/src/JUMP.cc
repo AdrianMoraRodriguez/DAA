@@ -9,9 +9,17 @@
 
 #include "JUMP.h"
 
-void JUMP::jump(int& pc, int new_position, int operand) const {
-  if (new_position < 0) {
+void JUMP::operate() const {
+  try {
+    isValid();
+    *pc_ = new_position_ - 1;
+  } catch (const char* e) {
+    throw e;
+  }
+}
+
+void JUMP::isValid() const {
+  if (new_position_ < 0) {
     throw "Error: Se ha intentado saltar a una posición negativa.";
   }
-  pc = new_position - 1;
 }

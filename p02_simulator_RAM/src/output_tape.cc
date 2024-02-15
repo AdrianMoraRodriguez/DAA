@@ -14,5 +14,6 @@ void OutputTape::loadTape(const std::string& kFileName) {
 void OutputTape::writeOutput(const std::string& output) {
   file_.open(file_name_, std::ios::app);
   file_ << output;
+  file_ << " ";
   file_.close();
 }

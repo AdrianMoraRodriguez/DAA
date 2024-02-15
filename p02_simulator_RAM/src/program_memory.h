@@ -13,6 +13,22 @@
 #include <vector>
 #include <map>
 
+#include "alu.h"
+#include "JUMP.h"
+#include "JGTZ.h"
+#include "JZERO.h"
+#include "HALT.h"
+#include "ADD.h"
+#include "SUB.h"
+#include "MUL.h"
+#include "DIV.h"
+#include "store.h"
+#include "load.h"
+#include "read.h"
+#include "write.h"
+#include "HALT.h"
+#include "unknow_instruction.h"
+
 #pragma once
 
 /**
@@ -24,12 +40,14 @@ class ProgramMemory {
   ProgramMemory() {}
   ~ProgramMemory() {}
   void createLabel(const std::string& kLabel, int line_number);
-  void loadProgram(const std::string& kFilename);
-  std::string getInstruction(int line_number) const { return program_[line_number]; };
+  void loadProgram(const std::string& kFilename, int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape);
+  ALU* getInstruction(int line_number) const { return instructions_[line_number]; };
   int getLablePosition(const std::string& kLabel) const { return labels_.at(kLabel); };
   int getProgramSize() const { return program_.size(); };
   void checkOperation(const std::vector<std::string>& kOperation, const std::string& type_of_access);
+  void makeInstructions(int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape);
  private:
   std::vector<std::string> program_;
+  std::vector<ALU*> instructions_;
   std::map<std::string, int> labels_;
 };

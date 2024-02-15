@@ -4,7 +4,8 @@
 
 class ADD : public ALU {
  public:
-  ADD() {}
+  ADD(DataMemory* data_memory) {data_memory_ = data_memory;}
   ~ADD() {}
-  int operate(int r0, int operand) const override;
+  void operate() const override;
+  void isValid() const override;
 };

@@ -15,8 +15,6 @@ int main(int argc, char* argv[]) {
   std::string kFileName = argv[1];
   std::string kInputFileName = argv[2];
   std::string kOutputFileName = argv[3];
-  ProgramMemory program_memory;
-  program_memory.loadProgram(kFileName);
   MaquinaRAM maquina_ram(kFileName, kInputFileName, kOutputFileName);
   maquina_ram.Run();
   return 0;
