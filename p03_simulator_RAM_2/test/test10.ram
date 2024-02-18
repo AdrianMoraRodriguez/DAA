@@ -1,0 +1,11 @@
+# Programa que testea el direccionamiento indirecto de los vectores
+
+lee:	read 1[*5]
+			load 1[*5]
+			jzero fin
+			write 1[*5]
+            load 5
+            ADD =1
+            store 5
+			jump lee
+fin:	halt

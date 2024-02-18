@@ -9,8 +9,8 @@
 
 #include "maquina_ram.h"
 
-MaquinaRAM::MaquinaRAM(const std::string& kFileName, const std::string& kInputFileName, const std::string& kOutputFile ,int number_of_registers) {
-  data_memory_ = DataMemory(number_of_registers);
+MaquinaRAM::MaquinaRAM(const std::string& kFileName, const std::string& kInputFileName, const std::string& kOutputFile,int vector_length ,int number_of_registers) {
+  data_memory_ = DataMemory(number_of_registers, vector_length);
   program_memory_ = ProgramMemory();
   input_tape_ = InputTape();
   input_tape_.loadTape(kInputFileName);
