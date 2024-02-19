@@ -9,6 +9,10 @@
 
 #include "JGTZ.h"
 
+/**
+ * @brief Ejecuta la operación JUMP
+ * 
+ */
 void JGTZ::operate() const {
   try {
     isValid();
@@ -17,11 +21,23 @@ void JGTZ::operate() const {
     }
   } catch (const char* e) {
     throw e;
+  } catch (...) {
+    throw "Error desconocido en JGTZ";
   }
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void JGTZ::isValid() const {
   if (new_position_ < 0) {
     throw "Error: Se ha intentado saltar a una posición negativa.";
+  }
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
+  }
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
   }
 }

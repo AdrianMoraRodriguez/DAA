@@ -6,8 +6,6 @@
  * @date 2024-01-30
  * 
  */
-
-
 #include "alu.h"
 #pragma once
 
@@ -16,4 +14,5 @@ class JGTZ : public ALU {
   JGTZ(DataMemory* data_memory) {data_memory_ = data_memory;}
   void operate() const override;
   void isValid() const override;
+  std::string printInstruction() const override;
 };

@@ -6,17 +6,13 @@
  * @date 2024-01-30
  * 
  */
-
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include "data_memory.h"
-#include "indirect_data_writter.h"
-#include "direct_data_writter.h"
 #include "indirect_data_reader.h"
 #include "direct_data_reader.h"
-#include "constant_data_writter.h"
 #include "program_memory.h"
 #include "alu.h"
 #include "HALT.h"
@@ -29,7 +25,6 @@
 #include "JGTZ.h"
 #include "input_tape.h"
 #include "output_tape.h"
-
 #pragma once
 
 class Maquina {
@@ -39,7 +34,7 @@ class Maquina {
   ~Maquina() {}
   virtual void Run() = 0;
  protected:
-  void printState();
+  void printState(const std::string& kFileName = "No file");
   DataMemory data_memory_;
   ProgramMemory program_memory_;
   ALU* alu_;

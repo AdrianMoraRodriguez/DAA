@@ -6,8 +6,6 @@
  * @date 2024-01-30
  * 
  */
-
-
 #include "alu.h"
 #pragma once
 
@@ -17,4 +15,5 @@ class JZERO : public ALU {
   ~JZERO() {}
   void operate() const override;
   void isValid() const override;
+  std::string printInstruction() const override;
 };

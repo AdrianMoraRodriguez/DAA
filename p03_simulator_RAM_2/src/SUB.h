@@ -7,7 +7,6 @@
  * 
  */
 #include "alu.h"
-
 #pragma once
 
 /**
@@ -20,4 +19,5 @@ class SUB : public ALU {
   ~SUB() {}
   void operate() const override;
   void isValid() const override;
+  std::string printInstruction() const override;
 };

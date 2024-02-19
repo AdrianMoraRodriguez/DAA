@@ -6,13 +6,11 @@
  * @date 2024-01-30
  * 
  */
-
 #include <iostream>
 #include <string>
 #include <vector>
 
 #include "maquina.h"
-
 #pragma once
 
 class MaquinaRAMSoft: public Maquina {

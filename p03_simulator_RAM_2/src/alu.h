@@ -6,7 +6,6 @@
  * @date 2024-01-30
  * 
  */
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,8 +19,7 @@
 
 #pragma once
 
-
-class ALU { //TODO En todas las operaciones comprobar si data_reader_name_ es error, si es así, lanzar excepción
+class ALU {
  public:
   ALU() {}
   ALU(DataMemory* data_memory);
@@ -57,6 +55,7 @@ class ALU { //TODO En todas las operaciones comprobar si data_reader_name_ es er
   std::string getOperationName() const { return operation_name_; }
   void loadOutputTape(OutputTape* output_tape) { output_tape_ = output_tape; }
   void loadInputTape(InputTape* input_tape) { input_tape_ = input_tape; }
+  virtual std::string printInstruction() const = 0;
  protected:
   DataMemory* data_memory_;
   DataReader* data_reader_ = new DirectDataReader();

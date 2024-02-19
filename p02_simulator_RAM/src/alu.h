@@ -21,7 +21,7 @@
 #pragma once
 
 
-class ALU { //TODO En todas las operaciones comprobar si data_reader_name_ es error, si es así, lanzar excepción
+class ALU { 
  public:
   ALU() {}
   ALU(DataMemory* data_memory);

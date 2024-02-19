@@ -6,7 +6,6 @@
  * @date 2024-01-30
  * 
  */
-
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -28,13 +27,8 @@
 #include "write.h"
 #include "HALT.h"
 #include "unknow_instruction.h"
-
 #pragma once
 
-/**
- * @brief Clase ProgramMemory
- * 
- */
 class ProgramMemory {
  public:
   ProgramMemory() {}

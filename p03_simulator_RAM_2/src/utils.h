@@ -36,7 +36,7 @@ std::string getTypeOfAccess(std::string& operand, const std::map<std::string, in
       return "direct";
     } else if (kLabels.at(operand) >= 0) {
       operand = std::to_string(kLabels.at(operand));
-      return "indiferent";
+      return operand; // Esto lo hago para facilitar la impresión de la máquina, en los jumps, jgtz y jzero puedo imprimir la etiqueta
     }
     return "error";
   } catch (std::out_of_range& e) {

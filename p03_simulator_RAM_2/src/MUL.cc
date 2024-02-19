@@ -8,7 +8,10 @@
  */
 #include "MUL.h"
 
-
+/**
+ * @brief Ejecuta la operación de multiplicación
+ * 
+ */
 void MUL::operate() const {
   try {
     isValid();
@@ -20,6 +23,39 @@ void MUL::operate() const {
   }
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void MUL::isValid() const {
-  //everything is valid in the multiplication
+  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
+    throw "Operando no válido";
+  }
+}
+
+/**
+ * @brief Devuelve la instrucción en formato string
+ * 
+ * @return std::string 
+ */
+std::string MUL::printInstruction() const {
+  std::string instruction = "MUL ";
+  if (data_reader_name_ == "direct") {
+    instruction += std::to_string(operand_);
+  } else if (data_reader_name_ == "indirect") {
+    instruction += "*" + std::to_string(operand_);
+  } else if (data_reader_name_ == "constant") {
+    instruction += "=" + std::to_string(operand_);
+  }
+  if (position_in_vector_ != 0 && data_reader_in_vector_name_ != "direct") {
+    if (data_reader_in_vector_name_ == "direct") {
+      instruction += "[" + std::to_string(position_in_vector_) + "]";
+    } else if (data_reader_in_vector_name_ == "indirect") {
+      instruction += "[*" + std::to_string(position_in_vector_) + "]";
+    } else if (data_reader_in_vector_name_ == "constant") {
+      instruction += "[" + std::to_string(position_in_vector_) + "]";
+    }
+  }
+  instruction += "\n";
+  return instruction;
 }

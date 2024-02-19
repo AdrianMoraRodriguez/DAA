@@ -1,8 +1,22 @@
+/**
+ * @file input_tape.h
+ * @author Adrián Mora Rodríguez (alu0101465883@ull.edu.es)
+ * @brief Implementación de la cinta de entrada
+ * @version 0.1
+ * @date 2024-01-30
+ * 
+ */
 #include <algorithm>
 
 #include "input_tape.h"
 
-
+/**
+ * @brief Vectoriza una línea de texto
+ * 
+ * @param kLine 
+ * @param kDelimiter 
+ * @return std::vector<int> 
+ */
 std::vector<int> vectorize(const std::string& kLine, char kDelimiter) {
   std::vector<int> result;
   std::string token = "";
@@ -18,6 +32,11 @@ std::vector<int> vectorize(const std::string& kLine, char kDelimiter) {
   return result;
 }
 
+/**
+ * @brief Obtiene el siguiente valor de la cinta de entrada
+ * 
+ * @return int 
+ */
 int InputTape::getNextInput() {
   if (head_ < tape_.size()) {
     return tape_[head_++];
@@ -26,6 +45,11 @@ int InputTape::getNextInput() {
   }
 }
 
+/**
+ * @brief Carga la cinta de entrada
+ * 
+ * @param kFileName 
+ */
 void InputTape::loadTape(const std::string& kFileName) {
   std::ifstream file(kFileName);
   std::string line;
@@ -36,6 +60,11 @@ void InputTape::loadTape(const std::string& kFileName) {
   }
 }
 
+/**
+ * @brief Construye un nuevo objeto de cinta de entrada
+ * 
+ * @param kFileName 
+ */
 InputTape::InputTape(const std::string& kFileName) {
   loadTape(kFileName);
 }

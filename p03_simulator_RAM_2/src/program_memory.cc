@@ -6,10 +6,22 @@
  * @date 2024-01-30
  * 
  */
-
 #include "program_memory.h"
 #include "utils.h"
 
+/**
+ * @brief Hace la operanción correspondiente a la instrucción
+ * 
+ * @param kOperation 
+ * @param pc 
+ * @param data_memory 
+ * @param output_tape 
+ * @param input_tape 
+ * @param kTypeOfAccess 
+ * @param kTypeOfVectorAccess 
+ * @param lines_executed 
+ * @return ALU* 
+ */
 ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape, const std::string& kTypeOfAccess, const std::string& kTypeOfVectorAccess,int* lines_executed ) {
   std::string instruction = instructionToLowerCase(kOperation[0]);
   int operand = 0;
@@ -63,6 +75,7 @@ ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory
     instruction_made->loadPositionInVector(position_in_vector);
     instruction_made->loadOperationName(instruction);
     instruction_made->loadTypeOfVectorAccess(kTypeOfVectorAccess);
+    instruction_made->loadDataReader(kTypeOfAccess);
     return instruction_made;
   }
   if (instruction == "jgtz") {
@@ -72,6 +85,7 @@ ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory
     instruction_made->loadPositionInVector(position_in_vector);
     instruction_made->loadOperationName(instruction);
     instruction_made->loadTypeOfVectorAccess(kTypeOfVectorAccess);
+    instruction_made->loadDataReader(kTypeOfAccess);
     return instruction_made;
   }
   if (instruction == "jzero") {
@@ -81,6 +95,7 @@ ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory
     instruction_made->loadPositionInVector(position_in_vector);
     instruction_made->loadOperationName(instruction);
     instruction_made->loadTypeOfVectorAccess(kTypeOfVectorAccess);
+    instruction_made->loadDataReader(kTypeOfAccess);
     return instruction_made;
   }
   if (instruction == "store") {
@@ -133,6 +148,12 @@ ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory
    return instruction_made;
 }
 
+/**
+ * @brief Preprocesa la instrucción
+ * 
+ * @param instruction 
+ * @return std::string 
+ */
 std::string preProcessInstruction(std::string instruction) {
   std::string auxiliar;
   for (int i = 0; i < instruction.size(); i++) {
@@ -141,6 +162,7 @@ std::string preProcessInstruction(std::string instruction) {
   }
   return auxiliar;
 }
+
 /**
  * @brief Load the program from a file.
  * 
@@ -163,19 +185,25 @@ void ProgramMemory::loadProgram(const std::string& kFilename, int* pc, DataMemor
     program_.push_back(line);
   }
   file.close();
-  //si encontramos una palabra al principio de la línea con dos puntos, es una etiqueta, por lo que se guarda
   for (int i = 0; i < program_.size(); i++) {
-    //Primero, hacemos un split de la línea con separador " "
     std::string delimiter = ":";
     std::string label = program_[i].substr(0, program_[i].find(delimiter));
     if (label.size() == program_[i].size()) continue;
     createLabel(removeTabsAndReturns(label), i);
-    //quitar la etiqueta de la línea y dejar la instrucción como pirmiera palabra
     program_[i] = program_[i].substr(program_[i].find(delimiter) + 1, program_[i].size());
   }
   makeInstructions(pc, data_memory, output_tape, input_tape, lines_executed);
 }
 
+/**
+ * @brief Hace la instrucción correspondiente y la guarda
+ * 
+ * @param pc 
+ * @param data_memory 
+ * @param output_tape 
+ * @param input_tape 
+ * @param lines_executed 
+ */
 void ProgramMemory::makeInstructions(int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape, int* lines_executed) {
   for (int i = 0; i < program_.size(); i++) {
     std::vector<std::string> instruction_parts = prepareCommand(program_[i]);

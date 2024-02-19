@@ -9,6 +9,14 @@
 
 #include "indirect_data_reader.h"
 
+/**
+ * @brief Lee el valor de la dirección de memoria
+ * 
+ * @param address 
+ * @param vector_address 
+ * @param kVector 
+ * @return int 
+ */
 int IndirectDataReader::Read(int address, int vector_address ,const std::vector<std::vector<int>>& kVector) {
     try {
       return kVector[kVector[address][vector_address]][0]; //desición de diseño: El direccionamiento indirecto te devuelve la primera posición del vector
@@ -17,6 +25,13 @@ int IndirectDataReader::Read(int address, int vector_address ,const std::vector<
     }
 }
 
+/**
+ * @brief Lee la posición de memoria
+ * 
+ * @param address 
+ * @param kVector 
+ * @return int 
+ */
 int IndirectDataReader::ReadPosition(int address ,const std::vector<std::vector<int>>& kVector) {
     try {
       return kVector[address][0];

@@ -6,10 +6,20 @@
  * @date 2024-01-30
  * 
  */
-
 #include "program_memory.h"
 #include "utils.h"
 
+/**
+ * @brief Prepara la instrucción para ser procesada.
+ * 
+ * @param kOperation 
+ * @param pc 
+ * @param data_memory 
+ * @param output_tape 
+ * @param input_tape 
+ * @param kTypeOfAccess 
+ * @return ALU* 
+ */
 ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape, const std::string& kTypeOfAccess ) {
   std::string instruction = instructionToLowerCase(kOperation[0]);
   int operand = 0;
@@ -105,6 +115,12 @@ ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory
    return instruction_made;
 }
 
+/**
+ * @brief Prepara la instrucción para ser procesada.
+ * 
+ * @param instruction 
+ * @return std::string 
+ */
 std::string preProcessInstruction(std::string instruction) {
   std::string auxiliar;
   for (int i = 0; i < instruction.size(); i++) {
@@ -113,6 +129,7 @@ std::string preProcessInstruction(std::string instruction) {
   }
   return auxiliar;
 }
+
 /**
  * @brief Load the program from a file.
  * 
@@ -148,6 +165,14 @@ void ProgramMemory::loadProgram(const std::string& kFilename, int* pc, DataMemor
   makeInstructions(pc, data_memory, output_tape, input_tape);
 }
 
+/**
+ * @brief Prepara la instrucción para ser procesada.
+ * 
+ * @param pc 
+ * @param data_memory 
+ * @param output_tape 
+ * @param input_tape 
+ */
 void ProgramMemory::makeInstructions(int* pc, DataMemory* data_memory, OutputTape* output_tape, InputTape* input_tape) {
   for (int i = 0; i < program_.size(); i++) {
     std::vector<std::string> instruction_parts = prepareCommand(program_[i]);
@@ -175,7 +200,12 @@ void ProgramMemory::createLabel(const std::string& kLabel, int line_number) {
   labels_[kLabel] = line_number;
 }
 
-
+/**
+ * @brief Get the instruction from the program.
+ * 
+ * @param kOperation 
+ * @param type_of_access 
+ */
 void ProgramMemory::checkOperation(const std::vector<std::string>& kOperation, const std::string& type_of_access) {
   if (kOperation[0] == "store" && type_of_access == "constant") {
     throw "No se puede almacenar en una dirección de memoria constante";

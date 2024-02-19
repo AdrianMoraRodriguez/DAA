@@ -9,7 +9,10 @@
 
 #include "SUB.h"
 
-
+/**
+ * @brief Realiza la operación de resta
+ * 
+ */
 void SUB::operate() const {
   try {
     isValid();
@@ -17,9 +20,17 @@ void SUB::operate() const {
     data_memory_->modifyMemory(0, result);
   } catch (const char* e) {
     throw e;
+  } catch (...) {
+    throw "Error desconocido en SUB";
   }
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void SUB::isValid() const {
-  //everything is valid in the subtraction
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
+  }
 }

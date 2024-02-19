@@ -5,6 +5,13 @@
 
 #pragma once
 
+/**
+ * @brief Comprueba si una cadena de caracteres es un número
+ * 
+ * @param str 
+ * @return true 
+ * @return false 
+ */
 bool onlyNumbers(std::string str) {
   try {
     std::stoi(str);
@@ -14,6 +21,13 @@ bool onlyNumbers(std::string str) {
   }
 }
 
+/**
+ * @brief Elimina un caracter de una cadena de caracteres
+ * 
+ * @param str 
+ * @param character 
+ * @return std::string 
+ */
 std::string removeCharacters(std::string str, char character) {
   std::string auxiliar;
   for (int i = 0; i < str.size(); i++) {
@@ -24,6 +38,13 @@ std::string removeCharacters(std::string str, char character) {
   return auxiliar;
 }
 
+/**
+ * @brief Get the Type Of Access object
+ * 
+ * @param operand 
+ * @param kLabels 
+ * @return std::string 
+ */
 std::string getTypeOfAccess(std::string& operand, const std::map<std::string, int>& kLabels) {
   if (operand.find("*") != std::string::npos) {
     operand = removeCharacters(operand, '*');
@@ -35,10 +56,18 @@ std::string getTypeOfAccess(std::string& operand, const std::map<std::string, in
     return "direct";
   } else if (kLabels.at(operand) >= 0) {
     operand = std::to_string(kLabels.at(operand));
+    return "indiferent";
   }
   return "error";
 }
 
+/**
+ * @brief Divide una cadena de caracteres en partes
+ * 
+ * @param str 
+ * @param delimiter 
+ * @return std::vector<std::string> 
+ */
 std::vector<std::string> split(const std::string& str, char delimiter) {
   std::vector<std::string> parts;
   std::string part;
@@ -51,7 +80,6 @@ std::vector<std::string> split(const std::string& str, char delimiter) {
     }
   }
   parts.push_back(part);
-  //quitar las posiciones que son únicamente espacios en blanco
   for (int i = 0; i < parts.size(); i++) {
     if (parts[i] == "") {
       parts.erase(parts.begin() + i);
@@ -61,6 +89,12 @@ std::vector<std::string> split(const std::string& str, char delimiter) {
   return parts;
 }
 
+/**
+ * @brief Convierte una instrucción a minúsculas
+ * 
+ * @param instruction 
+ * @return std::string 
+ */
 std::string instructionToLowerCase(std::string instruction) {
   std::string auxiliar;
   for (int i = 0; i < instruction.size(); i++) {
@@ -69,6 +103,12 @@ std::string instructionToLowerCase(std::string instruction) {
   return auxiliar;
 }
 
+/**
+ * @brief Elimina los tabuladores y los retornos de carro de una cadena de caracteres
+ * 
+ * @param str 
+ * @return std::string 
+ */
 std::string removeTabsAndReturns(std::string str) {
   std::string auxiliar;
   for (int i = 0; i < str.size(); i++) {
@@ -79,6 +119,12 @@ std::string removeTabsAndReturns(std::string str) {
   return auxiliar;
 }
 
+/**
+ * @brief Prepara una instrucción para ser procesada
+ * 
+ * @param instruction 
+ * @return std::vector<std::string> 
+ */
 std::vector<std::string> prepareCommand(std::string instruction) {
   instruction = removeTabsAndReturns(instruction);
   std::vector<std::string> instruction_parts = split(instruction, ' ');

@@ -11,6 +11,8 @@ void READ::operate() const {
     }
   } catch (const char* e) {
     throw e;
+  } catch (...) {
+    throw "Error desconocido en READ";
   }
 }
 
@@ -20,5 +22,11 @@ void READ::isValid() const {
   }
   if (operand_ == 0) {
     throw "No se puede escribir a el acumulador (R0)";
+  }
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
+  }
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
   }
 }

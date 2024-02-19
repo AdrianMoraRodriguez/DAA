@@ -6,10 +6,12 @@
  * @date 2024-01-30
  * 
  */
-
 #include "SUB.h"
 
-
+/**
+ * @brief Realiza la operación de resta
+ * 
+ */
 void SUB::operate() const {
   try {
     isValid();
@@ -21,6 +23,39 @@ void SUB::operate() const {
   }
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void SUB::isValid() const {
-  //everything is valid in the subtraction
+  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
+    throw "Operando no válido";
+  }
+}
+
+/**
+ * @brief Devuelve la instrucción en formato string
+ * 
+ * @return std::string 
+ */
+std::string SUB::printInstruction() const {
+  std::string instruction = "SUB ";
+  if (data_reader_name_ == "direct") {
+    instruction += std::to_string(operand_);
+  } else if (data_reader_name_ == "indirect") {
+    instruction += "*" + std::to_string(operand_);
+  } else if (data_reader_name_ == "constant") {
+    instruction += "=" + std::to_string(operand_);
+  }
+  if (position_in_vector_ != 0 && data_reader_in_vector_name_ != "direct") {
+    if (data_reader_in_vector_name_ == "direct") {
+      instruction += "[" + std::to_string(position_in_vector_) + "]";
+    } else if (data_reader_in_vector_name_ == "indirect") {
+      instruction += "[*" + std::to_string(position_in_vector_) + "]";
+    } else if (data_reader_in_vector_name_ == "constant") {
+      instruction += "[" + std::to_string(position_in_vector_) + "]";
+    }
+  }
+  instruction += "\n";
+  return instruction;
 }

@@ -6,9 +6,17 @@
  * @date 2024-01-30
  * 
  */
-
 #include "maquina_ram.h"
 
+/**
+ * @brief Constructor de la clase MaquinaRAM
+ * 
+ * @param kFileName 
+ * @param kInputFileName 
+ * @param kOutputFile 
+ * @param vector_length 
+ * @param number_of_registers 
+ */
 MaquinaRAM::MaquinaRAM(const std::string& kFileName, const std::string& kInputFileName, const std::string& kOutputFile,int vector_length ,int number_of_registers) {
   data_memory_ = DataMemory(number_of_registers, vector_length);
   program_memory_ = ProgramMemory();
@@ -20,6 +28,10 @@ MaquinaRAM::MaquinaRAM(const std::string& kFileName, const std::string& kInputFi
   output_file_ = kOutputFile;
 }
 
+/**
+ * @brief Método que ejecuta la máquina RAM
+ * 
+ */
 void MaquinaRAM::Run() {
   while (true) {
     try {
@@ -28,7 +40,13 @@ void MaquinaRAM::Run() {
     } catch (const char* e) {
       std::cerr << "Error en la línea " << (pc_ + 1)  << ": " << e << std::endl;
       exit(EXIT_FAILURE);
-    }  
+    } catch (const std::string e) {
+      std::cerr << "Error en la línea " << (pc_ + 1) << ": " << e << std::endl;
+      exit(EXIT_FAILURE);
+    } catch (...) {
+      std::cerr << "Error desconocido en la línea " << (pc_ + 1) << std::endl;
+      exit(EXIT_FAILURE);
+    }
     pc_++;
     if (pc_ >= program_memory_.getProgramSize()) {
       break;

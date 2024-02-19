@@ -9,10 +9,18 @@
 
 #include "HALT.h"
 
+/**
+ * @brief Operación de halt
+ * 
+ */
 void HALT::operate() const {
   exit(EXIT_SUCCESS);
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void HALT::isValid() const {
   //everything is valid in the halt
 }

@@ -12,11 +12,8 @@
 #include <vector>
 
 #include "data_memory.h"
-#include "indirect_data_writter.h"
-#include "direct_data_writter.h"
 #include "indirect_data_reader.h"
 #include "direct_data_reader.h"
-#include "constant_data_writter.h"
 #include "program_memory.h"
 #include "alu.h"
 #include "HALT.h"

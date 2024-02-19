@@ -6,9 +6,12 @@
  * @date 2024-01-30
  * 
  */
-
 #include "JGTZ.h"
 
+/**
+ * @brief Realiza la operación de salto si el registro r0 es mayor que 0
+ * 
+ */
 void JGTZ::operate() const {
   try {
     isValid();
@@ -20,8 +23,26 @@ void JGTZ::operate() const {
   }
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void JGTZ::isValid() const {
+  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
+    throw "Operando no válido";
+  }
   if (new_position_ < 0) {
     throw "Error: Se ha intentado saltar a una posición negativa.";
   }
+}
+
+/**
+ * @brief Devuelve la instrucción en formato string
+ * 
+ * @return std::string 
+ */
+std::string JGTZ::printInstruction() const {
+  std::string instruction = "JGTZ ";
+  instruction += data_reader_name_ + "\n";
+  return instruction;
 }

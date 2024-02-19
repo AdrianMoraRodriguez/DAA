@@ -6,9 +6,16 @@
  * @date 2024-01-30
  * 
  */
-
 #include "direct_data_reader.h"
 
+/**
+ * @brief Lee el valor de la dirección de memoria
+ * 
+ * @param address 
+ * @param vector_address 
+ * @param kVector 
+ * @return int 
+ */
 int DirectDataReader::Read(int address, int vector_address ,const std::vector<std::vector<int>>& kVector) {
   try {
     return kVector[address][vector_address];
@@ -17,6 +24,13 @@ int DirectDataReader::Read(int address, int vector_address ,const std::vector<st
   }
 }
 
+/**
+ * @brief Lee la posición de memoria
+ * 
+ * @param address 
+ * @param kVector 
+ * @return int 
+ */
 int DirectDataReader::ReadPosition(int address ,const std::vector<std::vector<int>>& kVector) {
   try {
     return address;

@@ -1,5 +1,17 @@
+/**
+ * @file ADD.h
+ * @author Adrián Mora Rodríguez (alu0101465883@ull.edu.es)
+ * @brief Implementación de la suma
+ * @version 0.1
+ * @date 2024-01-30
+ * 
+ */
 #include "ADD.h"
 
+/**
+ * @brief Operación de suma
+ * 
+ */
 void ADD::operate() const {
   try {
     isValid();
@@ -7,9 +19,20 @@ void ADD::operate() const {
     data_memory_->modifyMemory(0, result);
   } catch (const char* e) {
     throw e;
+  } catch (...) {
+    throw "Error desconocido en ADD";
   }
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void ADD::isValid() const {
-  //everything is valid in the sum
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
+  }
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
+  }
 }

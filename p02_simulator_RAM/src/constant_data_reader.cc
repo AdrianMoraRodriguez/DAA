@@ -9,6 +9,13 @@
 
 #include "constant_data_reader.h"
 
+/**
+ * @brief Construye un nuevo objeto de la clase Constant Data Reader
+ * 
+ * @param address 
+ * @param vector 
+ * @return int 
+ */
 int ConstantDataReader::Read(int address, const std::vector<int>& vector) {
   return address;
 }

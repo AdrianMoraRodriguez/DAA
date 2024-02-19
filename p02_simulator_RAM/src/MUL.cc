@@ -1,5 +1,5 @@
 /**
- * @file MUL.h
+ * @file MUL.cc
  * @author Adrián Mora Rodríguez (alu0101465883@ull.edu.es)
  * @brief Implementación de la multiplicación
  * @version 0.1
@@ -8,7 +8,10 @@
  */
 #include "MUL.h"
 
-
+/**
+ * @brief Realiza la operación de multiplicación
+ * 
+ */
 void MUL::operate() const {
   try {
     isValid();
@@ -16,9 +19,20 @@ void MUL::operate() const {
     data_memory_->modifyMemory(0, result);
   } catch (const char* e) {
     throw e;
+  } catch (...) {
+    throw "Error desconocido en MUL";
   }
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void MUL::isValid() const {
-  //everything is valid in the multiplication
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
+  }
+  if (data_reader_name_ == "error") {
+    throw "Error: data_reader_name_ is error";
+  }
 }

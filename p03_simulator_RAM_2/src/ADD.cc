@@ -1,5 +1,17 @@
+/**
+ * @file ADD.cc
+ * @author Adrián Mora Rodríguez (alu0101465883@ull.edu.es)
+ * @brief Implementación de la suma
+ * @version 0.1
+ * @date 2024-01-30
+ * 
+ */
 #include "ADD.h"
 
+/**
+ * @brief Realiza la operación de suma
+ * 
+ */
 void ADD::operate() const {
   try {
     isValid();
@@ -11,6 +23,39 @@ void ADD::operate() const {
   }
 }
 
+/**
+ * @brief Comprueba que los datos son válidos
+ * 
+ */
 void ADD::isValid() const {
-  //everything is valid in the sum
+  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
+    throw "Operando no válido";
+  }
+}
+
+/**
+ * @brief Devuelve la instrucción en formato string
+ * 
+ * @return std::string 
+ */
+std::string ADD::printInstruction() const {
+  std::string instruction = "ADD ";
+  if (data_reader_name_ == "direct") {
+    instruction += std::to_string(operand_);
+  } else if (data_reader_name_ == "indirect") {
+    instruction += "*" + std::to_string(operand_);
+  } else if (data_reader_name_ == "constant") {
+    instruction += "=" + std::to_string(operand_);
+  }
+  if (position_in_vector_ != 0 && data_reader_in_vector_name_ != "direct") {
+    if (data_reader_in_vector_name_ == "direct") {
+      instruction += "[" + std::to_string(position_in_vector_) + "]";
+    } else if (data_reader_in_vector_name_ == "indirect") {
+      instruction += "[*" + std::to_string(position_in_vector_) + "]";
+    } else if (data_reader_in_vector_name_ == "constant") {
+      instruction += "[" + std::to_string(position_in_vector_) + "]";
+    }
+  }
+  instruction += "\n";
+  return instruction;
 }

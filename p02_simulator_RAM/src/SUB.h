@@ -10,10 +10,6 @@
 
 #pragma once
 
-/**
- * @brief Clase SUB que hereda de ALU
- * 
- */
 class SUB : public ALU {
  public:
   SUB(DataMemory* data_memory) {data_memory_ = data_memory;}

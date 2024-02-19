@@ -6,15 +6,10 @@
  * @date 2024-01-30
  * 
  */
-
 #include "alu.h"
 
 #pragma once
 
-/**
- * @brief Clase DIV que hereda de ALU
- * 
- */
 class DIV : public ALU {
  public:
   DIV(DataMemory* data_memory) {data_memory_ = data_memory;}

@@ -6,14 +6,9 @@
  * @date 2024-01-30
  * 
  */
-
 #include <vector>
 #pragma once
 
-/**
- * @brief Clase abstracta que representa la lectura de datos
- * 
- */
 class DataReader {
  public:
   virtual int Read(int address, const std::vector<int>& kVector) = 0;

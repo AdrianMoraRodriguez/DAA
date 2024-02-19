@@ -6,9 +6,7 @@
  * @date 2024-01-30
  * 
  */
-
 #include "data_reader.h"
-
 #pragma once
 
 class IndirectDataReader: public DataReader {
