@@ -28,9 +28,6 @@ void SUB::operate() const {
  * 
  */
 void SUB::isValid() const {
-  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
-    throw "Operando no válido";
-  }
 }
 
 /**

@@ -32,6 +32,7 @@ class ALU {
   void loadLinesExecuted(int* lines_executed) { lines_executed_ = lines_executed; }
   void loadOperationName(std::string operation_name) { operation_name_ = operation_name; }
   void loadPositionInVector(int position_in_vector) { position_in_vector_ = position_in_vector; }
+  void loadVectorSize(int vector_size) { vector_size_ = vector_size; }
   void loadTypeOfVectorAccess(std::string data_reader_in_vector) { 
     data_reader_in_vector_name_ = data_reader_in_vector; 
     if (data_reader_in_vector == "direct") {
@@ -67,7 +68,8 @@ class ALU {
   int new_position_;
   int* pc_;
   int* lines_executed_;
-  std::string data_reader_name_;
+  int vector_size_ = 10;
+  std::string data_reader_name_ = "direct";
   std::string data_reader_in_vector_name_ = "direct";
   std::string operation_name_ = "NOT ASSIGNED";
 };

@@ -21,6 +21,7 @@
 #include "SUB.h"
 #include "MUL.h"
 #include "DIV.h"
+#include "ADV.h"
 #include "store.h"
 #include "load.h"
 #include "read.h"

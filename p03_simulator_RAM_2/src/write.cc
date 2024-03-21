@@ -26,9 +26,6 @@ void WRITE::operate() const {
  * 
  */
 void WRITE::isValid() const {
-  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
-    throw "Operando no válido";
-  }
   if (operand_ < 0 ) {
     throw "No se puede escribir desde una posición negativa";
   }

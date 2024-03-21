@@ -32,6 +32,16 @@ ALU* generateInstruction(std::vector<std::string> kOperation,int* pc, DataMemory
   if (kOperation.size() > 2) {
     position_in_vector = std::stoi(kOperation[2]);
   }
+  if (instruction == "adv") {
+    ALU* instruction_made = new ADV(data_memory);
+    instruction_made->loadOperand(operand);
+    instruction_made->loadVectorSize(data_memory->getSize());
+    instruction_made->loadPositionInVector(position_in_vector);
+    instruction_made->loadDataReader(kTypeOfAccess);
+    instruction_made->loadOperationName(instruction);
+    instruction_made->loadTypeOfVectorAccess(kTypeOfVectorAccess);
+    return instruction_made;
+  }
   if (instruction == "add") {
     ALU* instruction_made = new ADD(data_memory);
     instruction_made->loadOperand(operand);

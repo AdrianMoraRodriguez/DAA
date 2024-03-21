@@ -29,6 +29,10 @@ class DataMemory {
   int getr0() {return registers_[0][0];}
   std::vector<std::vector<int>>& getRegisters() {return registers_;}
   std::string printMemory();
+  int getSize() const {
+    //get the size of the vector in the first position
+    return registers_[0].size();
+  }
  private:
   std::vector<std::vector<int>> registers_;
 };

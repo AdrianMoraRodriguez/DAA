@@ -28,9 +28,6 @@ void DIV::operate() const {
  * 
  */
 void DIV::isValid() const {
-  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
-    throw "Operando no válido";
-  }
   int vector_postion = data_reader_in_vector_->ReadPosition(position_in_vector_, data_memory_->getRegisters());
   if (data_reader_->Read(operand_, vector_postion, data_memory_->getRegisters()) == 0 || data_memory_->getr0() == 0) {
     throw "No se puede dividir entre 0";

@@ -27,9 +27,6 @@ void LOAD::operate() const {
  * 
  */
 void LOAD::isValid() const {
-  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
-    throw "Operando no válido";
-  }
   if (operand_ == 0 && data_reader_name_ != "constant") {
     throw "No se puede hacer un load desde el propio acumulador (R0)";
   }

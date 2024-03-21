@@ -30,10 +30,10 @@ clean :
 	@ find . -name basura -exec rm {} \;
 
 tar:
-	@ tar -cvzf ../targz/p01_Adrian_Mora_Rodriguez.tar.gz .
+	@ tar -cvzf ../targz/p03_Adrian_Mora_Rodriguez.tar.gz .
 
 tarclean:
-	@ rm -f ../targz/p01_Adrian_Mora_Rodriguez.tar.gz
+	@ rm -f ../targz/p03_Adrian_Mora_Rodriguez.tar.gz
 
 remake :
 	@ make clean

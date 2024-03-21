@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/p03_simulator_RAM_2",
-            "args": ["/home/usuario/DAA/p03_simulator_RAM_2/test/insercion.ram", "/home/usuario/DAA/p03_simulator_RAM_2/test/test10_input1.txt", "/home/usuario/DAA/p03_simulator_RAM_2/test/output_101.txt"],
+            "args": ["/home/usuario/DAA/p03_simulator_RAM_2/test/modi.ram", "/home/usuario/DAA/p03_simulator_RAM_2/test/testbubble_input1.txt", "/home/usuario/DAA/p03_simulator_RAM_2/test/output_modi.txt"],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",
             "environment": [],

@@ -1,0 +1,12 @@
+READ: read 3
+      load 3
+      jzero END_READ
+      store 1[*2]
+      load 2
+      add =1
+      store 2
+      jump READ
+END_READ: adv 1
+          store 3
+          write 3
+          halt

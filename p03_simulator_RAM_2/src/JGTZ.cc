@@ -28,9 +28,6 @@ void JGTZ::operate() const {
  * 
  */
 void JGTZ::isValid() const {
-  if (data_reader_name_ == "error" || data_reader_in_vector_name_ == "error") {
-    throw "Operando no válido";
-  }
   if (new_position_ < 0) {
     throw "Error: Se ha intentado saltar a una posición negativa.";
   }
