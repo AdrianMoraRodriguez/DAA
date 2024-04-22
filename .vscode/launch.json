@@ -4,7 +4,7 @@
         "name": "(gdb) Launch",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/p06_tsp/p06_tsp",
+        "program": "${workspaceFolder}/p08_maximum_diversity_problem/p08_maximum_diversity_problem",
         "args": [""],
         "stopAtEntry": true,
         "cwd": "${fileDirname}",
