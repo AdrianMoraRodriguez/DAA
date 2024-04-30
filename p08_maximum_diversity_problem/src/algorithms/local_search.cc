@@ -19,9 +19,10 @@ Solution LocalSearch::run() {
   while(improvement) {
     Solution actual_best_solution = best_solution;
     improvement = false;
+    double distance_to_compare = best_distance;
     for (int i = 0; i < points_not_in_solution.size(); i++) {
       for (int j = 0; j < best_solution.size(); j++) {
-        double new_distance = evaluate_change(best_solution.get_solution(), best_distance, points_not_in_solution[i], j);
+        double new_distance = evaluate_change(best_solution.get_solution(), distance_to_compare, points_not_in_solution[i], j);
         if (new_distance > best_distance) {
           actual_best_solution = best_solution;
           actual_best_solution.remove_point(actual_best_solution.get_solution()[j], new_distance);
